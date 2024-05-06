@@ -1,5 +1,7 @@
 package com.mytests.spring.springJpaConstructorsInQueries;
 
+import com.mytests.spring.springJpaConstructorsInQueries.repositories.UuidEntityRepo;
+import com.mytests.spring.springJpaConstructorsInQueries.repositories.UuidEntityRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

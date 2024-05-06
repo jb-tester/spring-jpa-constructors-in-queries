@@ -1,10 +1,8 @@
-package com.mytests.spring.springJpaConstructorsInQueries;
+package com.mytests.spring.springJpaConstructorsInQueries.repositories;
 
 import com.mytests.spring.springJpaConstructorsInQueries.dto.ClassProjection;
-import com.mytests.spring.springJpaConstructorsInQueries.dto.InnerProjection;
 import com.mytests.spring.springJpaConstructorsInQueries.dto.RecordProjection;
 import jakarta.persistence.EntityManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Repository;
 
 @Repository

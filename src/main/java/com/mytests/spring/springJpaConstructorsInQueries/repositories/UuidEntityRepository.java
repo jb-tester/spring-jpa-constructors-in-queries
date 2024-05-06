@@ -1,4 +1,4 @@
-package com.mytests.spring.springJpaConstructorsInQueries;
+package com.mytests.spring.springJpaConstructorsInQueries.repositories;
 
 import com.mytests.spring.springJpaConstructorsInQueries.dto.*;
 import com.mytests.spring.springJpaConstructorsInQueries.model.UuidEntity;
