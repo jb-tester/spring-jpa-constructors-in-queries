@@ -11,11 +11,11 @@ import java.util.UUID;
 
 public interface UuidEntityRepository extends CrudRepository<UuidEntity, UUID> {
 
-   // https://youtrack.jetbrains.com/issue/IDEA-337145
+    // https://youtrack.jetbrains.com/issue/IDEA-337145
     @Query("select e from com.mytests.spring.springJpaConstructorsInQueries.model.UuidEntity e where e.num1 > e.num2")
     List<UuidEntity> testEntityFQN();
 
-  // doesn't work in @Query annotations, ok in createQuery() methods
+    // doesn't work in @Query annotations, ok in createQuery() methods
   /* @Query("""
            select new ClassProjection(
            cast(e.foo as java.lang.String),
@@ -63,7 +63,7 @@ public interface UuidEntityRepository extends CrudRepository<UuidEntity, UUID> {
             """)
     List<MainDTO> testConstructorInConstructor();
 
- // https://youtrack.jetbrains.com/issue/IDEA-319502
+    // https://youtrack.jetbrains.com/issue/IDEA-319502
     @Query("select new com.mytests.spring.springJpaConstructorsInQueries.dto.LombokProjection(e.foo) from UuidEntity e")
     List<LombokProjection> testLombokProjection();
 
@@ -77,19 +77,20 @@ public interface UuidEntityRepository extends CrudRepository<UuidEntity, UUID> {
             ) from UuidEntity e""")
     List<OperationsResultsRecord> testArithmeticOperationsWithFieldToDtoTypesExplicitMatching(@Param("longArg") Long longArg);
 
+    // https://youtrack.jetbrains.com/issue/IDEA-369739
     @Query("""
             select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecord(
             12, 2L, 1e-9d, 123.4f) from UuidEntity
             """)
     List<OperationsResultsRecord> testArithmeticOperationsWithConstants();
-
+    // https://youtrack.jetbrains.com/issue/IDEA-369739
     @Query("""
             select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecord(
             e.num1*12, e.num1*2L, e.num1*1e-9d, e.num1*123.4f) from UuidEntity e
             """)
     List<OperationsResultsRecord> testArithmeticOperationsWithOperationsOnConstantsAndFields();
-
-@Query("""
+    // https://youtrack.jetbrains.com/issue/IDEA-369739
+    @Query("""
             select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecord(
             :arg1 * 12, :arg2 * 2L, :arg3 * 1.1, :arg4 * 123.4f) from UuidEntity e
             """)
