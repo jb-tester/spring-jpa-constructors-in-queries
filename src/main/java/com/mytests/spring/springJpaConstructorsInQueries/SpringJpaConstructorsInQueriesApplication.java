@@ -36,6 +36,8 @@ public class SpringJpaConstructorsInQueriesApplication {
                jpaRepo.testArithmeticOperationsWithConstants().iterator().forEachRemaining(System.out::println);
                System.out.println("--operations on constants and fields as DTO constructor args--");
                jpaRepo.testArithmeticOperationsWithOperationsOnConstantsAndFields().iterator().forEachRemaining(System.out::println);
+               System.out.println("--operations on query parameters as DTO constructor args--");
+               jpaRepo.testArithmeticOperationsWithOperationsOnParameters(3, 5L, 2.5, 3f).iterator().forEachRemaining(System.out::println);
            };
        }
 }

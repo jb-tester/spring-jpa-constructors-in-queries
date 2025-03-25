@@ -72,23 +72,28 @@ public interface UuidEntityRepository extends CrudRepository<UuidEntity, UUID> {
     List<DoubleMapping> testArithmeticsOnDouble();
 
     @Query("""
-            select new
-            com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecordProjection(
-            2 * e.num1,  :longArg, 1.5 * e.num2, e.num3 * 10
+            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecord(
+            2 * e.num1,:longArg, 1.5 * e.num2, e.num3 * 10
             ) from UuidEntity e""")
-    List<OperationsResultsRecordProjection> testArithmeticOperationsWithFieldToDtoTypesExplicitMatching(@Param("longArg") Long longArg);
+    List<OperationsResultsRecord> testArithmeticOperationsWithFieldToDtoTypesExplicitMatching(@Param("longArg") Long longArg);
 
     @Query("""
-            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecordProjection(
+            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecord(
             12, 2L, 1e-9d, 123.4f) from UuidEntity
             """)
-    List<OperationsResultsRecordProjection> testArithmeticOperationsWithConstants();
+    List<OperationsResultsRecord> testArithmeticOperationsWithConstants();
 
     @Query("""
-            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecordProjection(
+            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecord(
             e.num1*12, e.num1*2L, e.num1*1e-9d, e.num1*123.4f) from UuidEntity e
             """)
-    List<OperationsResultsRecordProjection> testArithmeticOperationsWithOperationsOnConstantsAndFields();
+    List<OperationsResultsRecord> testArithmeticOperationsWithOperationsOnConstantsAndFields();
+
+@Query("""
+            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecord(
+            :arg1 * 12, :arg2 * 2L, :arg3 * 1.1, :arg4 * 123.4f) from UuidEntity e
+            """)
+    List<OperationsResultsRecord> testArithmeticOperationsWithOperationsOnParameters(Integer arg1, Long arg2, Double arg3, Float arg4);
 
 
 }
