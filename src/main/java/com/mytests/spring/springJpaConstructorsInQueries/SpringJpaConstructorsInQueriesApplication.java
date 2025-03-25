@@ -28,7 +28,14 @@ public class SpringJpaConstructorsInQueriesApplication {
                jpaRepo.testConstructorInConstructor().iterator().forEachRemaining(System.out::println);
                System.out.println("-----------------LombokClass in `select new`---------------------");
                jpaRepo.testLombokProjection().iterator().forEachRemaining(System.out::println);
-
+               System.out.println("-----------------Arithmetic operations in DTO constructors-----------------");
+               jpaRepo.testArithmeticsOnDouble().iterator().forEachRemaining(System.out::println);
+               System.out.println("--entity field and DTO field types strict matching in DTO constructors--");
+               jpaRepo.testArithmeticOperationsWithFieldToDtoTypesExplicitMatching(50L).iterator().forEachRemaining(System.out::println);
+               System.out.println("--constants as DTO constructor args--");
+               jpaRepo.testArithmeticOperationsWithConstants().iterator().forEachRemaining(System.out::println);
+               System.out.println("--operations on constants and fields as DTO constructor args--");
+               jpaRepo.testArithmeticOperationsWithOperationsOnConstantsAndFields().iterator().forEachRemaining(System.out::println);
            };
        }
 }

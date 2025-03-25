@@ -4,6 +4,7 @@ import com.mytests.spring.springJpaConstructorsInQueries.dto.*;
 import com.mytests.spring.springJpaConstructorsInQueries.model.UuidEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.UUID;
@@ -65,5 +66,29 @@ public interface UuidEntityRepository extends CrudRepository<UuidEntity, UUID> {
  // https://youtrack.jetbrains.com/issue/IDEA-319502
     @Query("select new com.mytests.spring.springJpaConstructorsInQueries.dto.LombokProjection(e.foo) from UuidEntity e")
     List<LombokProjection> testLombokProjection();
+
+    // https://youtrack.jetbrains.com/issue/IDEA-364515
+    @Query("select new com.mytests.spring.springJpaConstructorsInQueries.dto.DoubleMapping(e.num2 * 1.5) from UuidEntity e")
+    List<DoubleMapping> testArithmeticsOnDouble();
+
+    @Query("""
+            select new
+            com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecordProjection(
+            2 * e.num1,  :longArg, 1.5 * e.num2, e.num3 * 10
+            ) from UuidEntity e""")
+    List<OperationsResultsRecordProjection> testArithmeticOperationsWithFieldToDtoTypesExplicitMatching(@Param("longArg") Long longArg);
+
+    @Query("""
+            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecordProjection(
+            12, 2L, 1e-9d, 123.4f) from UuidEntity
+            """)
+    List<OperationsResultsRecordProjection> testArithmeticOperationsWithConstants();
+
+    @Query("""
+            select new com.mytests.spring.springJpaConstructorsInQueries.dto.OperationsResultsRecordProjection(
+            e.num1*12, e.num1*2L, e.num1*1e-9d, e.num1*123.4f) from UuidEntity e
+            """)
+    List<OperationsResultsRecordProjection> testArithmeticOperationsWithOperationsOnConstantsAndFields();
+
 
 }

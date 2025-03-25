@@ -8,7 +8,8 @@ https://youtrack.jetbrains.com/issue/IDEA-319502
 also: entity FQN 
 https://youtrack.jetbrains.com/issue/IDEA-337145
 
-
+DTO constructor args matching:
+https://youtrack.jetbrains.com/issue/IDEA-364515
 
 TODO - check:
 https://youtrack.jetbrains.com/issue/IDEA-349325/Query-analyzer-does-not-recognize-string-interpolated-class-name-Cannot-resolve-constructor-missingValue
